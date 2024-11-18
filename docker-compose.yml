@@ -1,0 +1,45 @@
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+  phlare_data: {}
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.36.2
+    container_name: prometheus
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus/:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus-full.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    restart: always
+
+  phlare:
+    image: grafana/phlare:latest
+    container_name: phlare
+    ports:
+      - 4100:4100
+    command: -config.file=/etc/phlare/config.yaml
+    volumes:
+      - phlare_data:/data
+      - ./phlare/phlare-full.yaml:/etc/phlare/config.yaml
+    restart: always
+
+  grafana:
+    image: grafana/grafana:main
+    container_name: grafana
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./grafana/config.monitoring
+    restart: always
