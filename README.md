@@ -3,24 +3,24 @@
 ## Default configuration
 
 ### Node0 
-- Proof: `host.docker.internal:6060`
-- RPC: `host.docker.internal:6065`
-- Tendermint: `host.docker.internal:26660`
+- Prometheus Proof: `host.docker.internal:6060`
+- Phlare RPC: `host.docker.internal:6065`
+- Phlare Tendermint: `host.docker.internal:26660`
 
 ### Node1 
-- Proof: `host.docker.internal:6061`
-- RPC: `host.docker.internal:6066`
-- Tendermint: `host.docker.internal:26661`
+- Prometheus Proof: `host.docker.internal:6061`
+- Phlare RPC: `host.docker.internal:6066`
+- Phlare Tendermint: `host.docker.internal:26661`
 
 ### Node2
-- Proof: `host.docker.internal:6062`
-- RPC: `host.docker.internal:6067`
-- Tendermint: `host.docker.internal:26662`
+- Prometheus Proof: `host.docker.internal:6062`
+- Phlare RPC: `host.docker.internal:6067`
+- Phlare Tendermint: `host.docker.internal:26662`
 
 ### Node3
-- Proof: `host.docker.internal:6063`
-- RPC: `host.docker.internal:6068`
-- Tendermint: `host.docker.internal:26663`
+- Prometheus Proof: `host.docker.internal:6063`
+- Phlare RPC: `host.docker.internal:6068`
+- Phlare Tendermint: `host.docker.internal:26663`
 
 ## Custom node url
 
