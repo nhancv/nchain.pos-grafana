@@ -2,6 +2,10 @@
 
 ## Default configuration
 
+### Chain ID
+
+- `evmos_9000-1`
+
 ### Node0 
 - Prometheus Proof: `host.docker.internal:6060`
 - Phlare RPC: `host.docker.internal:6065`
@@ -25,6 +29,8 @@
 ## Custom node url
 
 ```
+export CHAIN_ID=evmos_9000-1
+
 export NODE0_PROOF_URL=host.docker.internal:6060
 export NODE1_PROOF_URL=host.docker.internal:6061
 export NODE2_PROOF_URL=host.docker.internal:6062
