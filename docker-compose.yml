@@ -16,14 +16,14 @@ services:
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
     ports:
-      - 9090:9090
+      - "9090:9090"
     restart: always
 
   phlare:
     image: grafana/phlare:latest
     container_name: phlare
     ports:
-      - 4100:4100
+      - "4100:4100"
     command: -config.file=/etc/phlare/config.yaml
     volumes:
       - phlare_data:/data
@@ -36,7 +36,7 @@ services:
     depends_on:
       - prometheus
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/
