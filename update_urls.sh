@@ -26,21 +26,15 @@ for i in "${!domains[@]}"; do
     sed "s/job_name: \"node0\"/job_name: \"node$i\"/" | \
     sed "s/targets: \\[\"host.docker.internal:6060\"\\]/targets: [\"$domain:6060\"]/" \
     >> $PHLARE_CONF
+  echo "" >> $PHLARE_CONF
 
   # Update prometheus config for each node
-  # Block node
   echo "$prometheus_block_node" | \
     sed "s/job_name: \"node0\"/job_name: \"node${i}\"/" | \
     sed "s/host.docker.internal:26660/${domain}:26660/" \
     >> $PROMETHEUS_CONF
-  
-  # Block node-rpc
-  echo "$prometheus_block_rpc" | \
-    sed "s/job_name: \"node-rpc0\"/job_name: \"node-rpc${i}\"/" | \
-    sed "s/host.docker.internal:6065/${domain}:6065/" \
-    >> $PROMETHEUS_CONF
   echo "" >> $PROMETHEUS_CONF
-
+  
 done
 rm -rf "$PHLARE_CONF.bak"
 rm -rf "$PROMETHEUS_CONF.bak"
