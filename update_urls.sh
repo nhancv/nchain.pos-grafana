@@ -14,9 +14,7 @@ phlare_block=$(awk 'NR>1 {print}' $PHLARE_CONF.bk)
 # Update prometheus config header
 awk '/scrape_configs:/ {print; exit} {print}' $PROMETHEUS_CONF.bk > $PROMETHEUS_CONF
 awk '/- job_name: '\''prometheus'\''/{flag=1} flag && !/^  - job_name: "node0"/{print} /^  - job_name: "node0"/{flag=0}' $PROMETHEUS_CONF.bk | sed '/^- job_name: "node0"/d' >> $PROMETHEUS_CONF
-# echo "" >> $PROMETHEUS_CONF
-prometheus_block_node=$(awk '/- job_name: "node0"/,/- job_name: "node-rpc0"/{if(!/- job_name: "node-rpc0"/)print}' $PROMETHEUS_CONF.bk)
-prometheus_block_rpc=$(awk '/- job_name: "node-rpc0"/,0' $PROMETHEUS_CONF.bk)
+prometheus_block_node=$(awk '/- job_name: "node0"/{flag=1} /- job_name: "/ && !/- job_name: "node0"/ && flag{exit} flag' $PROMETHEUS_CONF.bk)
 
 for i in "${!domains[@]}"; do
   domain="${domains[$i]}"
