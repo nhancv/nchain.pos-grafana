@@ -1111,32 +1111,11 @@
         "label": "Job",
         "multi": false,
         "name": "job",
-        "options": [
-          {
-            "selected": true,
-            "text": "node0",
-            "value": "node0"
-          },
-          {
-            "selected": false,
-            "text": "node1",
-            "value": "node1"
-          },
-          {
-            "selected": false,
-            "text": "node2",
-            "value": "node2"
-          },
-          {
-            "selected": false,
-            "text": "node3",
-            "value": "node3"
-          }
-        ],
-        "query": "node0,node1,node2,node3",
+        "options": [],
+        "query": "label_values(up, job)",
         "queryValue": "",
         "skipUrlSync": false,
-        "type": "custom"
+        "type": "query"
       },
       {
         "current": {
