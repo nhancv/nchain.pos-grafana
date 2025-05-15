@@ -20,27 +20,24 @@ prometheus_block_rpc=$(awk '/- job_name: "node-rpc0"/,0' $PROMETHEUS_CONF.bk)
 
 for i in "${!domains[@]}"; do
   domain="${domains[$i]}"
-  proof_port=$((6060 + i))
-  rpc_port=$((6065 + i))
-  tendermint_port=$((26660 + i))
 
   # Generate phlare block for each node
   echo "$phlare_block" | \
     sed "s/job_name: \"node0\"/job_name: \"node$i\"/" | \
-    sed "s/targets: \\[\"host.docker.internal:6060\"\\]/targets: [\"$domain:$proof_port\"]/" \
+    sed "s/targets: \\[\"host.docker.internal:6060\"\\]/targets: [\"$domain:6060\"]/" \
     >> $PHLARE_CONF
 
   # Update prometheus config for each node
   # Block node
   echo "$prometheus_block_node" | \
     sed "s/job_name: \"node0\"/job_name: \"node${i}\"/" | \
-    sed "s/host.docker.internal:26660/${domain}:${tendermint_port}/" \
+    sed "s/host.docker.internal:26660/${domain}:26660/" \
     >> $PROMETHEUS_CONF
   
   # Block node-rpc
   echo "$prometheus_block_rpc" | \
     sed "s/job_name: \"node-rpc0\"/job_name: \"node-rpc${i}\"/" | \
-    sed "s/host.docker.internal:6065/${domain}:${rpc_port}/" \
+    sed "s/host.docker.internal:6065/${domain}:6065/" \
     >> $PROMETHEUS_CONF
   echo "" >> $PROMETHEUS_CONF
 
