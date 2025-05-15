@@ -1113,6 +1113,7 @@
         "name": "job",
         "options": [],
         "query": "label_values(up, job)",
+        "regex": "/^node[0-9]+$/",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "query"

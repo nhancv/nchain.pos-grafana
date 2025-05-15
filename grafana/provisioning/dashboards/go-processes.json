@@ -947,7 +947,7 @@
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
-        "regex": "/node.*/",
+        "regex": "/(node.*|rpc.*)/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
